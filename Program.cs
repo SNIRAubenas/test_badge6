@@ -6,24 +6,20 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Initialiser le lecteur RFID
         RFID rfid = new RFID();
 
-        // Événement déclenché lorsque le tag est lu
+        //lecture badge
         rfid.Tag += (sender, e) =>
         {
             Console.WriteLine($"Tag détecté : {e.Tag}");
         };
 
-        // Gérer les erreurs et exceptions
         try
         {
-            // Ouvrir la connexion au lecteur
+            //ouvrir le leceur
             rfid.Open();
             Console.WriteLine("Lecteur RFID prêt. Placez un badge pour le tester...");
             Console.WriteLine("Appuyez sur Entrée pour quitter.");
-
-            // Attendre que l'utilisateur appuie sur Entrée pour quitter
             Console.ReadLine();
         }
         catch (PhidgetException ex)
@@ -32,7 +28,6 @@ class Program
         }
         finally
         {
-            // Fermer proprement la connexion lorsque l'application se termine
             rfid.Close();
             Console.WriteLine("Lecteur RFID déconnecté.");
         }
