@@ -12,6 +12,9 @@ class Program
         rfid.Tag += (sender, e) =>
         {
             Console.WriteLine($"Tag détecté : {e.Tag}");
+            if (e.Tag == "1000e14339") {
+                Console.WriteLine("titouan");
+            } ;
         };
 
         try
