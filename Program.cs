@@ -7,21 +7,34 @@ class Program
     static void Main(string[] args)
     {
         RFID rfid = new RFID();
+        bool autorize; 
 
         //lecture badge
         rfid.Tag += (sender, e) =>
         {
-            Console.WriteLine($"Tag détecté : {e.Tag}");
-            if (e.Tag == "1000e14339") {
-                Console.WriteLine("titouan");
-            } ;
+            //reconnaitre si un badge est autorisé
+            Console.WriteLine($"Badge : {e.Tag}");
+            if (e.Tag == "1000e14339"|| e.Tag == "3800637172")//tag renseigné dans la bdd
+            {
+                Console.WriteLine("Bob tonnot");//nom renseigné dans la bdd
+                autorize = true;
+            }
+            else {
+                Console.Error.WriteLine("Badge non autorisé");
+                autorize=false;
+                }
+
+            if (autorize == true) {
+                //ouvrir la porte, activer le contacte de la clanche
+                Console.WriteLine("porte ouverte");
+            }
         };
 
         try
         {
             //ouvrir le leceur
             rfid.Open();
-            Console.WriteLine("Lecteur RFID prêt. Placez un badge pour le tester...");
+            Console.WriteLine("Lecteur RFID prêt. Placez un badge.");
             Console.WriteLine("Appuyez sur Entrée pour quitter.");
             Console.ReadLine();
         }
