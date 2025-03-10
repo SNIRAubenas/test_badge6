@@ -1,6 +1,8 @@
 ﻿using System;
 using Phidget22;
 using Phidget22.Events;
+using Serilog;
+
 
 class Program
 {
@@ -10,8 +12,10 @@ class Program
         bool autorize;
         DigitalOutput led = new DigitalOutput();        //on board led
         DigitalOutput clanche = new DigitalOutput();    //impultion clanche
-
+        var CheminLog = $@"%USERPROFILE%\\documents\\logs.txt";
+        var CheminLogs = Environment.ExpandEnvironmentVariables(CheminLog);
         //lecture badge
+  
         rfid.Tag += (sender, e) =>
         {
             //allumer on board led
@@ -25,6 +29,8 @@ class Program
             {
                 Console.WriteLine("Bob tonnot");//nom renseigné dans la bdd
                 autorize = true;
+               
+
             }
             else {
                 Console.Error.WriteLine("Badge non autorisé");
@@ -47,8 +53,17 @@ class Program
                     System.Threading.Thread.Sleep(2000);
                     clanche.State = false;
                     Console.WriteLine("clanche fermée");
-                    
+
+                    Serilog.Log.Logger = new LoggerConfiguration()
+                    .MinimumLevel.Debug()
+
+                    .WriteTo.File(CheminLogs, rollingInterval: RollingInterval.Infinite)
+                    .CreateLogger();
+                    Serilog.Log.Information("test");
+                    Serilog.Log.CloseAndFlush();
+
                     clanche.Close();
+                   
                 }
             }
             catch (Exception ex)
@@ -66,6 +81,15 @@ class Program
             Console.WriteLine("Lecteur RFID prêt. Placez un badge.");
             Console.WriteLine("Appuyez sur Entrée pour quitter.");
             Console.ReadLine();
+            
+            //lecture badge
+            Serilog.Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+               
+                .WriteTo.File(CheminLogs, rollingInterval: RollingInterval.Infinite) 
+                .CreateLogger();
+            Serilog.Log.Information("test");
+            Serilog.Log.CloseAndFlush();
         }
         catch (PhidgetException ex)
         {
