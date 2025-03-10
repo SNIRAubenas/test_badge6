@@ -44,7 +44,7 @@ class Program
 
                 if (autorize == true)
                 {
-                    //ouvrir la porte, activer le contacte de la clanche
+                    //ouvrir la porte, activer le contact de la clanche
                     
                     clanche.Channel = 1;
                     clanche.Open(1000);
