@@ -27,6 +27,12 @@ class Program
             Console.WriteLine($"Badge : {e.Tag}");
             if (e.Tag == "1000e14339" || e.Tag == "3800637172")//tag renseigné dans la bdd
             {
+                Serilog.Log.Logger = new LoggerConfiguration()
+                  .MinimumLevel.Debug()
+
+                  .WriteTo.File(CheminLogs, rollingInterval: RollingInterval.Infinite)
+                  .CreateLogger();
+                Serilog.Log.Error("Bob tonnot");
                 Console.WriteLine("Bob tonnot");//nom renseigné dans la bdd
                 autorize = true;
                
