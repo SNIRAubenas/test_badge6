@@ -8,10 +8,10 @@ class Program
 {
     static void Main(string[] args)
     {
-        RFID rfid = new RFID();
+        RFID rfid = new RFID(); 
         bool autorize;
         DigitalOutput led = new DigitalOutput();        //on board led
-        DigitalOutput clanche = new DigitalOutput();    //impultion clanche
+        DigitalOutput clanche = new DigitalOutput();    //impulsion clanche
         var CheminLog = $@"%USERPROFILE%\\documents\\logs.txt";
         var CheminLogs = Environment.ExpandEnvironmentVariables(CheminLog);
         //lecture badge
@@ -33,6 +33,12 @@ class Program
 
             }
             else {
+                Serilog.Log.Logger = new LoggerConfiguration()
+                  .MinimumLevel.Debug()
+
+                  .WriteTo.File(CheminLogs, rollingInterval: RollingInterval.Infinite)
+                  .CreateLogger();
+                Serilog.Log.Error("Badge non autorisé");
                 Console.Error.WriteLine("Badge non autorisé");
                 autorize = false;
             }
@@ -45,21 +51,23 @@ class Program
                 if (autorize == true)
                 {
                     //ouvrir la porte, activer le contact de la clanche
-                    
+                    Serilog.Log.Logger = new LoggerConfiguration()
+                   .MinimumLevel.Debug()
+
+                   .WriteTo.File(CheminLogs, rollingInterval: RollingInterval.Infinite)
+                   .CreateLogger();
                     clanche.Channel = 1;
                     clanche.Open(1000);
                     clanche.State = true;
                     Console.WriteLine("porte ouverte");
+                    Serilog.Log.Information("Porte ouverte");
                     System.Threading.Thread.Sleep(2000);
                     clanche.State = false;
                     Console.WriteLine("clanche fermée");
+                    Serilog.Log.Information("Clanche Fermée");
 
-                    Serilog.Log.Logger = new LoggerConfiguration()
-                    .MinimumLevel.Debug()
 
-                    .WriteTo.File(CheminLogs, rollingInterval: RollingInterval.Infinite)
-                    .CreateLogger();
-                    Serilog.Log.Information("test");
+                 
                     Serilog.Log.CloseAndFlush();
 
                     clanche.Close();
