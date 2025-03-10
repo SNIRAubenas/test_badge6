@@ -14,21 +14,41 @@ class Program
         {
             //reconnaitre si un badge est autorisé
             Console.WriteLine($"Badge : {e.Tag}");
-            if (e.Tag == "1000e14339"|| e.Tag == "3800637172")//tag renseigné dans la bdd
+            if (e.Tag == "1000e14339" || e.Tag == "3800637172")//tag renseigné dans la bdd
             {
                 Console.WriteLine("Bob tonnot");//nom renseigné dans la bdd
                 autorize = true;
             }
             else {
                 Console.Error.WriteLine("Badge non autorisé");
-                autorize=false;
-                }
+                autorize = false;
+            }
 
-            if (autorize == true) {
-                //ouvrir la porte, activer le contacte de la clanche
-                Console.WriteLine("porte ouverte");
+            try
+            {
+
+                if (autorize == true)
+                {
+                    //ouvrir la porte, activer le contacte de la clanche
+                    DigitalOutput output = new DigitalOutput();
+                    output.Channel = 0;
+                    output.Open(1000);
+                    output.State = true;
+                    Console.WriteLine("porte ouverte");
+                    System.Threading.Thread.Sleep(5000);
+                    output.State = false;
+                    Console.WriteLine("clanche fermée");
+                    
+                    output.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.Error.WriteLine("Erreur de lecture");
             }
         };
+
+
 
         try
         {
