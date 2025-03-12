@@ -39,11 +39,7 @@ class Program
 
             }
             else {
-                Serilog.Log.Logger = new LoggerConfiguration()
-                  .MinimumLevel.Debug()
-
-                  .WriteTo.File(CheminLogs, rollingInterval: RollingInterval.Infinite)
-                  .CreateLogger();
+              
                 Serilog.Log.Error("Badge non autorisé");
                 Console.Error.WriteLine("Badge non autorisé");
                 autorize = false;
@@ -57,11 +53,7 @@ class Program
                 if (autorize == true)
                 {
                     //ouvrir la porte, activer le contact de la clanche
-                    Serilog.Log.Logger = new LoggerConfiguration()
-                   .MinimumLevel.Debug()
-
-                   .WriteTo.File(CheminLogs, rollingInterval: RollingInterval.Infinite)
-                   .CreateLogger();
+                   
                     clanche.Channel = 1;
                     clanche.Open(1000);
                     clanche.State = true;
@@ -74,7 +66,6 @@ class Program
 
 
                  
-                    Serilog.Log.CloseAndFlush();
 
                     clanche.Close();
                    
@@ -97,11 +88,7 @@ class Program
             Console.ReadLine();
             
             //lecture badge
-            Serilog.Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-               
-                .WriteTo.File(CheminLogs, rollingInterval: RollingInterval.Infinite) 
-                .CreateLogger();
+         
             Serilog.Log.Information("test");
             Serilog.Log.CloseAndFlush();
         }
@@ -114,5 +101,7 @@ class Program
             rfid.Close();
             Console.WriteLine("Lecteur RFID déconnecté.");
         }
+        Serilog.Log.CloseAndFlush();
     }
+   
 }
