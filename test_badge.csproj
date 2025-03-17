@@ -9,6 +9,9 @@
 
   <ItemGroup>
     <PackageReference Include="Phidget22.NET" Version="1.22.20250106" />
+    <PackageReference Include="Serilog" Version="4.2.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
   </ItemGroup>
 
 </Project>
