@@ -32,7 +32,7 @@ class Program
 
                   .WriteTo.File(CheminLogs, rollingInterval: RollingInterval.Infinite)
                   .CreateLogger();
-                Serilog.Log.Error("Bob tonnot");
+                Serilog.Log.Information("Bob tonnot");
                 Console.WriteLine("Bob tonnot");//nom renseigné dans la bdd
                 autorize = true;
                
