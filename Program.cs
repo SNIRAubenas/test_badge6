@@ -96,14 +96,8 @@ class Program
             Console.WriteLine("Appuyez sur Entrée pour quitter.");
             Console.ReadLine();
             
-            //lecture badge
-            Serilog.Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-               
-                .WriteTo.File(CheminLogs, rollingInterval: RollingInterval.Infinite) 
-                .CreateLogger();
-            Serilog.Log.Information("test");
-            Serilog.Log.CloseAndFlush();
+           
+           
         }
         catch (PhidgetException ex)
         {
