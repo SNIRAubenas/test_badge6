@@ -1,5 +1,4 @@
 ﻿using System;
-
 using System.IO;
 using System.Threading;
 using Phidget22;
@@ -183,25 +182,31 @@ class Program
     }
 
 
-    //capture de mouvement pour la lumière
+    //capture de mouvement pour la lumière   
     static void DetectMotion()
     {
-        proximitySensor.Channel = 0;
-        proximitySensor.Open(1000);
-
-        while (true)
+        try
         {
-            double voltage = proximitySensor.Voltage;
+            proximitySensor.Channel = 0;
+            proximitySensor.Open(1000);
 
-
-            if (voltage > 3)
+            while (true)
             {
-                lumiere.Channel = 6;
-                lumiere.Open(1000);
-                lumiere.State = true;
-                Thread.Sleep(60000);
-                lumiere.State = false;
+                double voltage = proximitySensor.Voltage;
+
+                if (voltage > 3)
+                {
+                    lumiere.Channel = 6;
+                    lumiere.Open(1000);
+                    lumiere.State = true;
+                    Thread.Sleep(60000);
+                    lumiere.State = false;
+                }
             }
+        }
+        catch (PhidgetException ex)
+        {
+            Console.Error.WriteLine($"Erreur capteur de proximité : {ex.Message}");
         }
     }
 }
