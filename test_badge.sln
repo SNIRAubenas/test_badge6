@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test_badge", "test_badge.csproj", "{93F7811B-3E69-45E0-BD57-2B9150B83D33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test_badge", "test_badge.csproj", "{93F7811B-3E69-45E0-BD57-2B9150B83D33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Badge_Test", "..\Badge_Test\Badge_Test.csproj", "{D920F46B-5534-40BB-84C5-853B2E47F33D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{93F7811B-3E69-45E0-BD57-2B9150B83D33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93F7811B-3E69-45E0-BD57-2B9150B83D33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93F7811B-3E69-45E0-BD57-2B9150B83D33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D920F46B-5534-40BB-84C5-853B2E47F33D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D920F46B-5534-40BB-84C5-853B2E47F33D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D920F46B-5534-40BB-84C5-853B2E47F33D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D920F46B-5534-40BB-84C5-853B2E47F33D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F415AC08-94F9-4944-9618-4C6FF41415BB}
 	EndGlobalSection
 EndGlobal
