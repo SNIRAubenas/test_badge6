@@ -90,7 +90,7 @@ class Program
             //lecture badge
          
             Serilog.Log.Information("test");
-            Serilog.Log.CloseAndFlush();
+         
         }
         catch (PhidgetException ex)
         {
